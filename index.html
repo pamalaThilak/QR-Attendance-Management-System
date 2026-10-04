@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QR Attendance Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="app-header">
+
+    <div class="logo-box">QR</div>
+
+    <div>
+        <h1>Attendance Management System</h1>
+        <p>QR Based Smart Attendance</p>
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <!-- ================= REGISTRATION ================= -->
+
+    <section id="registrationPage" class="page active">
+
+        <div class="card">
+
+            <button class="back-btn hidden"
+                    onclick="showRegistrationPage()">
+                ← Back
+            </button>
+
+            <div class="page-title">
+                <h2>Registration</h2>
+                <p>Create your account to continue</p>
+            </div>
+
+            <div class="role-grid">
+
+                <button class="role-card"
+                        onclick="showTeacherRegistration()">
+
+                    <div class="role-icon">👨‍🏫</div>
+
+                    <strong>Teacher Registration</strong>
+
+                </button>
+
+
+                <button class="role-card"
+                        onclick="showStudentRegistration()">
+
+                    <div class="role-icon">👨‍🎓</div>
+
+                    <strong>Student Registration</strong>
+
+                </button>
+
+            </div>
+
+
+            <p class="login-link">
+
+                Already have an account?
+
+                <button onclick="showLoginPage()">
+                    Login
+                </button>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TEACHER REGISTRATION ================= -->
+
+    <section id="teacherRegistrationPage" class="page">
+
+        <div class="card form-card">
+
+            <button class="back-btn"
+                    onclick="showRegistrationPage()">
+                ← Back
+            </button>
+
+            <div class="page-title">
+                <h2>Teacher Registration</h2>
+                <p>Create your teacher account</p>
+            </div>
+
+
+            <form id="teacherRegistrationForm">
+
+                <label>Teacher Name</label>
+
+                <input
+                    type="text"
+                    id="teacherName"
+                    placeholder="Enter teacher name"
+                    required
+                >
+
+
+                <label>Create Password</label>
+
+                <input
+                    type="password"
+                    id="teacherPassword"
+                    placeholder="Create password"
+                    required
+                >
+
+
+                <label>Confirm Password</label>
+
+                <input
+                    type="password"
+                    id="teacherConfirmPassword"
+                    placeholder="Confirm password"
+                    required
+                >
+
+
+                <button type="submit"
+                        class="primary-btn">
+
+                    Create an Account
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STUDENT REGISTRATION ================= -->
+
+    <section id="studentRegistrationPage" class="page">
+
+        <div class="card form-card">
+
+            <button class="back-btn"
+                    onclick="showRegistrationPage()">
+                ← Back
+            </button>
+
+            <div class="page-title">
+                <h2>Student Registration</h2>
+                <p>Create your student account</p>
+            </div>
+
+
+            <form id="studentRegistrationForm">
+
+                <label>Student Name</label>
+
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Enter student name"
+                    required
+                >
+
+
+                <label>Student ID</label>
+
+                <input
+                    type="text"
+                    id="studentId"
+                    placeholder="Enter student ID"
+                    required
+                >
+
+
+                <label>Year</label>
+
+                <select id="studentYear" required>
+
+                    <option value="">
+                        Select Year
+                    </option>
+
+                    <option value="First Year">
+                        First Year
+                    </option>
+
+                    <option value="Second Year">
+                        Second Year
+                    </option>
+
+                    <option value="Third Year">
+                        Third Year
+                    </option>
+
+                    <option value="Final Year">
+                        Final Year
+                    </option>
+
+                </select>
+
+
+                <label>Branch</label>
+
+                <select id="studentBranch"
+                        onchange="loadStudentSections()"
+                        required>
+
+                    <option value="">
+                        Select Branch
+                    </option>
+
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="CIVIL">CIVIL</option>
+                    <option value="MECH">MECH</option>
+                    <option value="AIML">AIML</option>
+                    <option value="DS">DS / Data Science</option>
+
+                </select>
+
+
+                <label>Section</label>
+
+                <select id="studentSection"
+                        disabled
+                        required>
+
+                    <option value="">
+                        Select Section
+                    </option>
+
+                </select>
+
+
+                <label>Training Batch (Optional)</label>
+
+                <select id="studentTrainingBatch">
+
+                    <option value="">
+                        Not Assigned
+                    </option>
+
+                    <option value="Training Batch 1">
+                        Training Batch 1
+                    </option>
+
+                    <option value="Training Batch 2">
+                        Training Batch 2
+                    </option>
+
+                    <option value="Training Batch 3">
+                        Training Batch 3
+                    </option>
+
+                </select>
+
+
+                <label>Create Password</label>
+
+                <input
+                    type="password"
+                    id="studentPassword"
+                    placeholder="Create password"
+                    required
+                >
+
+
+                <label>Confirm Password</label>
+
+                <input
+                    type="password"
+                    id="studentConfirmPassword"
+                    placeholder="Confirm password"
+                    required
+                >
+
+
+                <button type="submit"
+                        class="primary-btn">
+
+                    Create an Account
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= LOGIN ================= -->
+
+    <section id="loginPage" class="page">
+
+        <div class="card form-card">
+
+            <button class="back-btn"
+                    onclick="showRegistrationPage()">
+                ← Back
+            </button>
+
+            <div class="page-title">
+
+                <h2>Login</h2>
+
+                <p>Select your account type</p>
+
+            </div>
+
+
+            <div class="login-tabs">
+
+                <button id="teacherLoginTab"
+                        class="login-tab active"
+                        onclick="showLoginForm('teacher')">
+
+                    Teacher
+
+                </button>
+
+
+                <button id="studentLoginTab"
+                        class="login-tab"
+                        onclick="showLoginForm('student')">
+
+                    Student
+
+                </button>
+
+            </div>
+
+
+            <!-- TEACHER LOGIN -->
+
+            <form id="teacherLoginForm"
+                  class="login-form">
+
+                <label>Teacher Name</label>
+
+                <input
+                    type="text"
+                    id="teacherLoginName"
+                    placeholder="Enter teacher name"
+                    required
+                >
+
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="teacherLoginPassword"
+                    placeholder="Enter password"
+                    required
+                >
+
+
+                <label class="remember-row">
+
+                    <input
+                        type="checkbox"
+                        id="teacherRememberMe"
+                    >
+
+                    Remember Me
+
+                </label>
+
+
+                <button type="submit"
+                        class="primary-btn">
+
+                    Login
+
+                </button>
+
+            </form>
+
+
+            <!-- STUDENT LOGIN -->
+
+            <form id="studentLoginForm"
+                  class="login-form hidden">
+
+                <label>Student ID</label>
+
+                <input
+                    type="text"
+                    id="studentLoginId"
+                    placeholder="Enter student ID"
+                    required
+                >
+
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="studentLoginPassword"
+                    placeholder="Enter password"
+                    required
+                >
+
+
+                <label class="remember-row">
+
+                    <input
+                        type="checkbox"
+                        id="studentRememberMe"
+                    >
+
+                    Remember Me
+
+                </label>
+
+
+                <button type="submit"
+                        class="primary-btn">
+
+                    Login
+
+                </button>
+
+            </form>
+
+
+            <div id="messageBox"
+                 class="message-box">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TEACHER DASHBOARD ================= -->
+
+    <section id="teacherDashboard" class="page">
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-header">
+
+                <div>
+                    <h2>Teacher Dashboard</h2>
+
+                    <p id="teacherWelcome">
+                        Welcome, Teacher
+                    </p>
+                </div>
+
+                <button class="logout-btn"
+                        onclick="logoutUser()">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+
+            <!-- ATTENDANCE TYPE -->
+
+            <div class="attendance-type">
+
+                <button id="regularAttendanceBtn"
+                        class="attendance-type-btn active"
+                        onclick="selectAttendanceType('regular')">
+
+                    Regular Attendance
+
+                </button>
+
+
+                <button id="trainingAttendanceBtn"
+                        class="attendance-type-btn"
+                        onclick="selectAttendanceType('training')">
+
+                    Training Attendance
+
+                </button>
+
+            </div>
+
+
+            <!-- REGULAR ATTENDANCE -->
+
+            <div id="regularAttendanceSection"
+                 class="attendance-section">
+
+                <h3>Regular Attendance</h3>
+
+
+                <label>Year</label>
+
+                <select id="regularYear">
+
+                    <option value="">
+                        Select Year
+                    </option>
+
+                    <option value="First Year">
+                        First Year
+                    </option>
+
+                    <option value="Second Year">
+                        Second Year
+                    </option>
+
+                    <option value="Third Year">
+                        Third Year
+                    </option>
+
+                    <option value="Final Year">
+                        Final Year
+                    </option>
+
+                </select>
+
+
+                <label>Branch</label>
+
+                <select id="regularBranch"
+                        onchange="loadRegularSections()">
+
+                    <option value="">
+                        Select Branch
+                    </option>
+
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="CIVIL">CIVIL</option>
+                    <option value="MECH">MECH</option>
+                    <option value="AIML">AIML</option>
+                    <option value="DS">DS / Data Science</option>
+
+                </select>
+
+
+                <label>Section</label>
+
+                <select id="regularSection"
+                        disabled>
+
+                    <option value="">
+                        Select Section
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TRAINING ATTENDANCE -->
+
+            <div id="trainingAttendanceSection"
+                 class="attendance-section hidden">
+
+                <h3>Training Attendance</h3>
+
+
+                <label>Select Training Batch</label>
+
+                <select id="trainingBatch">
+
+                    <option value="">
+                        Select Training Batch
+                    </option>
+
+                    <option value="Training Batch 1">
+                        Training Batch 1
+                    </option>
+
+                    <option value="Training Batch 2">
+                        Training Batch 2
+                    </option>
+
+                    <option value="Training Batch 3">
+                        Training Batch 3
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="attendance-actions">
+
+                <button id="startAttendanceBtn"
+                        class="primary-btn"
+                        onclick="startAttendance()">
+
+                    Start Attendance
+
+                </button>
+
+
+                <button id="generateQRBtn"
+                        class="primary-btn"
+                        onclick="generateQRCode()"
+                        disabled>
+
+                    Generate QR
+
+                </button>
+
+
+                <button id="endAttendanceBtn"
+                        class="danger-btn"
+                        onclick="stopAttendance()"
+                        disabled>
+
+                    End Attendance
+
+                </button>
+
+            </div>
+
+
+            <!-- QR -->
+
+            <div class="qr-card">
+
+                <h3>Attendance QR Code</h3>
+
+                <div id="qrContainer"
+                     class="qr-container">
+
+                    <p>QR Code will appear here</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="summary-grid">
+
+                <div class="summary-box">
+
+                    <span>Present</span>
+
+                    <strong id="presentCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <span>Total</span>
+
+                    <strong id="totalCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <span>Attendance %</span>
+
+                    <strong id="attendancePercentage">
+                        0%
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECORDS -->
+
+            <div class="records-card">
+
+                <h3>Attendance Records</h3>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Year</th>
+                                <th>Branch</th>
+                                <th>Section</th>
+                                <th>Type</th>
+                                <th>Time</th>
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="attendanceRecordsBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STUDENT DASHBOARD ================= -->
+
+    <!-- ================= STUDENT DASHBOARD ================= -->
+
+<section id="studentDashboard" class="page">
+
+    <div class="dashboard-card">
+
+        <!-- HEADER -->
+        <div class="dashboard-header">
+
+            <div>
+                <h2>Student Dashboard</h2>
+
+                <p id="studentWelcome">
+                    Welcome, Student
+                </p>
+            </div>
+
+            <button class="logout-btn"
+                    onclick="logoutUser()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+        <!-- 1. SCAN QR -->
+        <div class="student-scanner-card">
+
+            <h3>Scan QR for Attendance</h3>
+
+            <p>
+                Scan the QR code displayed by your faculty
+                to mark your attendance.
+            </p>
+
+            <button class="primary-btn"
+                    onclick="openStudentScanner()">
+
+                📷 Scan QR Code
+
+            </button>
+
+        </div>
+
+
+        <!-- 2. ATTENDANCE STATUS -->
+        <div id="studentAttendanceStatus"
+             class="student-attendance-status">
+
+            Attendance status will appear here.
+
+        </div>
+
+
+        <!-- 3. OVERALL ATTENDANCE -->
+        <div class="student-overall-card">
+
+            <h3>Overall Attendance</h3>
+
+            <div class="overall-percentage"
+                 id="studentAttendancePercentage">
+
+                0%
+
+            </div>
+
+            <div class="overall-details">
+
+                <div>
+                    <span>Present</span>
+                    <strong id="studentPresentCount">
+                        0
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Total Classes</span>
+                    <strong id="studentTotalClasses">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 4. REGULAR ATTENDANCE RECORDS -->
+        <div class="student-records-card">
+
+            <h3>Regular Attendance Records</h3>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Date</th>
+                            <th>Year</th>
+                            <th>Branch</th>
+                            <th>Section</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="studentRegularRecordsBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- 5. TRAINING ATTENDANCE RECORDS -->
+        <div class="student-records-card">
+
+            <h3>Training Attendance Records</h3>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Date</th>
+                            <th>Training Batch</th>
+                            <th>Branch</th>
+                            <th>Section</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="studentTrainingRecordsBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- 6. QR SCANNER AREA -->
+        <div id="studentScannerSection"
+             class="student-scanner-section hidden">
+
+            <div class="scanner-header">
+
+                <h3>Scan Attendance QR</h3>
+
+                <button class="close-scanner-btn"
+                        onclick="closeStudentScanner()">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+            <div id="qrReader"
+                 class="qr-reader">
+            </div>
+
+            <p id="scannerMessage"
+               class="scanner-message">
+
+                Point your camera at the attendance QR code.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script src="https://unpkg.com/html5-qrcode"
+        type="text/javascript"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
